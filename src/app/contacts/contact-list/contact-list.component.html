@@ -1,0 +1,15 @@
+<mat-accordion multi ="true" *ngIf ="contacts.length >0">
+  <mat-expansion-panel *ngFor ="let contact of contacts">
+    <mat-expansion-panel-header>
+     {{contact.name}}
+    </mat-expansion-panel-header>
+    <p>contact No: {{contact.contactNo}}</p>
+    <p> Address : {{contact.address}}</p>
+
+    <mat-action-row>
+      <a mat-button color="primary" [routerLink] ="['/edit',contact.id]">EDIT</a>
+      <button mat-button color ="warn" (click) = "onDelete(contact.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class = "info-text mat-body-2" *ngIf ="contacts.length <=0 "> No Contact Added yet.</p>

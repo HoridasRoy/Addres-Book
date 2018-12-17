@@ -1,0 +1,45 @@
+<mat-card>
+  <form (submit) ="onSaveContact(contactForm)" #contactForm="ngForm">
+      <mat-form-field>
+          <input matInput
+          type="text"
+          name="name"
+          [ngModel] = "contact?.name"
+          required
+          minlength="3"
+          placeholder="Name"
+          #name ="ngModel">
+          <mat-error *ngIf="name.invalid">please enter a valid name</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput
+          type="number"
+          name="contactNo"
+          [ngModel] ="contact?.contactNo"
+          required
+          placeholder="ContactNo"
+          #contactNo="ngModel">
+          <mat-error *ngIf ="contactNo.invalid">please enter a valid contact number</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <!-- <textarea matInput rows="6" [(ngModel)] = "enteredValue"></textarea> -->
+          <input matInput
+          type="text"
+          name="address"
+          [ngModel] = "contact?.address"
+          placeholder="Address"
+          #address>
+          <mat-error *ngIf ="address.invalid">please enter a valid address</mat-error>
+        </mat-form-field>
+
+        <button
+        mat-raised-button
+        type="submit"
+        color ="primary"
+        >save contact</button>
+
+  </form>
+
+</mat-card>
+
+
