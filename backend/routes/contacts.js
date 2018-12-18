@@ -3,9 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 const Contact = require('../models/contact');
+const CheckAuth = require('../middleware/check-auth');
 
-
-router.post('', (req,res, next) =>{
+router.post('',CheckAuth, (req,res, next) =>{
   const contact = new Contact({
     name: req.body.name,
     contactNo: req.body.contactNo,
@@ -22,7 +22,7 @@ router.post('', (req,res, next) =>{
 
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', CheckAuth, (req, res, next) => {
 
     const contact = new Contact ({
       _id: req.body.id,
@@ -67,7 +67,7 @@ router.get('/:id', (req, res, next) => {
   });
 })
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', CheckAuth, (req, res, next) => {
   Contact.deleteOne({_id: req.params.id}).then(result => {
     console.log(result);
     res.status(200).json({
