@@ -3,9 +3,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const contacstRoutes = require('./routes/contacts');
+const userRoutes = require('./routes/user');
 const app = express();
 
-mongoose.connect('mongodb://localhost/contacts')
+mongoose.connect('mongodb://localhost/contact')
 .then(() => {
   console.log('connected to database');
 })
@@ -31,5 +32,6 @@ app.use((req, res, next) =>{
 });
 
 app.use('/api/contacts', contacstRoutes);
+app.use('/api/user', userRoutes);
 
 module.exports = app;
