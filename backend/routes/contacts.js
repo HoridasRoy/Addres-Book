@@ -43,7 +43,7 @@ router.put('/:id', CheckAuth, (req, res, next) => {
     //   });
      });
 });
-router.get('', (req, res, next) =>{
+router.get('', CheckAuth,(req, res, next) =>{
 
     Contact.find()
     .then(documents => {
@@ -55,7 +55,7 @@ router.get('', (req, res, next) =>{
 
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id',CheckAuth, (req, res, next) => {
   Contact.findById(req.params.id).then(contact => {
     if(contact) {
       res.status(200).json(contact);

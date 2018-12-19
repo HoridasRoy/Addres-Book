@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { ContactsService } from "../contacts.service";
 import { from } from "rxjs";
-import { ActivatedRoute, ParamMap } from "@angular/router";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { Contact } from "../contact.model";
 
 @Component({
@@ -18,7 +18,7 @@ export class ContactCreateComponent implements OnInit {
   private contactId: string;
   contact: Contact;
 
-  constructor(public contactsService: ContactsService, public route: ActivatedRoute){}
+  constructor(public contactsService: ContactsService, public route: ActivatedRoute, private router: Router){}
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -46,5 +46,6 @@ export class ContactCreateComponent implements OnInit {
 
 
     form.resetForm();
+    this.router.navigate(['/myContacts']);
   }
 }
