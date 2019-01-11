@@ -22,6 +22,7 @@ export class ContactsService{
           contactNo: contact.contactNo,
           address: contact.address,
           id: contact._id,
+          creator: contact.creator
         };
       });
     }))

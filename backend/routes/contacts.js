@@ -9,7 +9,8 @@ router.post('',CheckAuth, (req,res, next) =>{
   const contact = new Contact({
     name: req.body.name,
     contactNo: req.body.contactNo,
-    address: req.body.address
+    address: req.body.address,
+    creator: req.userData.userId
   });
 
   contact.save().then(createdContact =>{
@@ -31,16 +32,19 @@ router.put('/:id', CheckAuth, (req, res, next) => {
       address: req.body.address
     });
 
-    Contact.updateOne({_id: req.params.id},contact)
+    Contact.updateOne({_id: req.params.id, creator: req.userData.userId},contact)
     .then( result =>{
-      console.log(result);
-      res.status(200).json({
-      message: 'updated successfully .'
-      });
-    // }).catch(err => {
-    //   res.status(200).json({
-    //     error: err
-    //   });
+      if(result.nModified > 0){
+        res.status(200).json({
+          message: 'updated successfully .'
+          });
+      }else{
+        res.status(401).json({
+          message: 'Authorization failed '
+        });
+      }
+
+
      });
 });
 router.get('', CheckAuth,(req, res, next) =>{
@@ -68,11 +72,16 @@ router.get('/:id',CheckAuth, (req, res, next) => {
 })
 
 router.delete('/:id', CheckAuth, (req, res, next) => {
-  Contact.deleteOne({_id: req.params.id}).then(result => {
-    console.log(result);
-    res.status(200).json({
-      message: 'contacts deleted .'
-    });
+  Contact.deleteOne({_id: req.params.id, creator: req.userData.userId}).then(result => {
+    if(result.n > 0){
+      res.status(200).json({
+        message: 'Deletion successfully .'
+        });
+    }else{
+      res.status(401).json({
+        message: 'Authorization failed '
+      });
+    }
 
   });
 });
