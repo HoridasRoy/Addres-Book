@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: 'addContact', component: ContactCreateComponent, canActivate: [AuthGuard]},
   {path: 'edit/:contactId', component: ContactCreateComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
+  {path: '', component: LoginComponent},
   {path: 'signup', component: SignupComponent}
 ];
 

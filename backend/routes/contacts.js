@@ -49,7 +49,7 @@ router.put('/:id', CheckAuth, (req, res, next) => {
 });
 router.get('', CheckAuth,(req, res, next) =>{
 
-    Contact.find()
+    Contact.find({creator: req.userData.userId})
     .then(documents => {
       res.status(200).json({
         message: 'Getting response from server..',
